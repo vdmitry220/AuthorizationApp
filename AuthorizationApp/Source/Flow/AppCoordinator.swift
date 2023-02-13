@@ -1,4 +1,3 @@
-
 import Foundation
 import UIKit
 import Swinject
@@ -32,6 +31,10 @@ extension AppCoordinator: Coordinator {
         } else {
             showAuthView()
         }
+    }
+    
+    func navigate(_ route: Route) {
+        
     }
 }
 

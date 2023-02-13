@@ -23,6 +23,8 @@ extension AppDelegate {
         let modulesAssembler = Assembler(
             [
                 AuthAssembly(),
+                SignUpAssembly(),
+                SignInAssembly(),
                 HomeAssembly()
             ],
             parent: serviceAssembler)

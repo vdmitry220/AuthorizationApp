@@ -4,24 +4,24 @@ import Swinject
 import SwinjectAutoregistration
 import Rswift
 
-class AuthAssembly {}
+class SignUpAssembly {}
 
-extension AuthAssembly: Assembly {
+extension SignUpAssembly: Assembly {
     
     func assemble(container: Container) {
-        container.register(AuthViewController.self) { resolver in
+        container.register(SignUpViewController.self) { resolver in
             
-            let viewModel = resolver ~> AuthViewModel.self
-            let view = AuthViewController()
+            let viewModel = resolver ~> SignUpViewModel.self
+            let view = SignUpViewController()
             view.inject(viewModel: viewModel)
             
             return view
         }
         
-        container.register(AuthViewModel.self) { resolver in
+        container.register(SignUpViewModel.self) { resolver in
             let coordinator = resolver ~> AuthCoordinator.self
             
-            return AuthViewModel(coordinator: coordinator)
+            return SignUpViewModel(coordinator: coordinator)
             
         }
     }

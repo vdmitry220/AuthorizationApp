@@ -26,4 +26,8 @@ extension HomeCoordinator: Coordinator {
         let homeViewController = resolver ~> HomeViewController.self
         self.navigationController.setViewControllers([homeViewController], animated: false)
     }
+    
+    func navigate(_ route: Route) {
+        
+    }
 }
