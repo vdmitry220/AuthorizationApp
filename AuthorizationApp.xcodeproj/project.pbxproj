@@ -16,12 +16,9 @@
 		3AC1B8472922A8B50017B757 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3AC1B8462922A8B50017B757 /* Assets.xcassets */; };
 		3AC1B84A2922A8B50017B757 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3AC1B8482922A8B50017B757 /* LaunchScreen.storyboard */; };
 		3AC2D16129955C49008710BE /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC2D16029955C49008710BE /* Button.swift */; };
-		3AD3A92329927BD1007047E4 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD3A92229927BD1007047E4 /* SignUpViewController.swift */; };
-		3AD3A92529927BEE007047E4 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD3A92429927BEE007047E4 /* SignInViewController.swift */; };
-		3AD3A92729927E7B007047E4 /* SignUpAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD3A92629927E7B007047E4 /* SignUpAssembly.swift */; };
-		3AD3A92929927E90007047E4 /* SignUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD3A92829927E90007047E4 /* SignUpViewModel.swift */; };
-		3AD3A92B29927EA8007047E4 /* SignInViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD3A92A29927EA8007047E4 /* SignInViewModel.swift */; };
-		3AD3A92D29927EBC007047E4 /* SignInAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD3A92C29927EBC007047E4 /* SignInAssembly.swift */; };
+		3AC4EEDA299BFD0100F81679 /* AuthState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC4EED9299BFD0100F81679 /* AuthState.swift */; };
+		3AC4EEDC299C063600F81679 /* Observable .swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC4EEDB299C063600F81679 /* Observable .swift */; };
+		3AD3A92329927BD1007047E4 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD3A92229927BD1007047E4 /* LoginViewController.swift */; };
 		3AD3A9322993E5B7007047E4 /* Route.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD3A9312993E5B7007047E4 /* Route.swift */; };
 		3AEFC6B8296F4EA20002A496 /* AuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AEFC6B7296F4EA10002A496 /* AuthViewModel.swift */; };
 		3AEFC6BA296F4EC30002A496 /* AuthAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AEFC6B9296F4EC30002A496 /* AuthAssembly.swift */; };
@@ -49,12 +46,9 @@
 		3AC1B8492922A8B50017B757 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3AC1B84B2922A8B50017B757 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3AC2D16029955C49008710BE /* Button.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Button.swift; sourceTree = "<group>"; };
-		3AD3A92229927BD1007047E4 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
-		3AD3A92429927BEE007047E4 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
-		3AD3A92629927E7B007047E4 /* SignUpAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpAssembly.swift; sourceTree = "<group>"; };
-		3AD3A92829927E90007047E4 /* SignUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewModel.swift; sourceTree = "<group>"; };
-		3AD3A92A29927EA8007047E4 /* SignInViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewModel.swift; sourceTree = "<group>"; };
-		3AD3A92C29927EBC007047E4 /* SignInAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInAssembly.swift; sourceTree = "<group>"; };
+		3AC4EED9299BFD0100F81679 /* AuthState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthState.swift; sourceTree = "<group>"; };
+		3AC4EEDB299C063600F81679 /* Observable .swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Observable .swift"; sourceTree = "<group>"; };
+		3AD3A92229927BD1007047E4 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		3AD3A9312993E5B7007047E4 /* Route.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Route.swift; sourceTree = "<group>"; };
 		3AEFC6B7296F4EA10002A496 /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
 		3AEFC6B9296F4EC30002A496 /* AuthAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthAssembly.swift; sourceTree = "<group>"; };
@@ -152,12 +146,12 @@
 		3A610D91296891EA0002158C /* Auth */ = {
 			isa = PBXGroup;
 			children = (
+				3AC4EED9299BFD0100F81679 /* AuthState.swift */,
 				3AC1B8412922A8B30017B757 /* AuthViewController.swift */,
 				3AEFC6B7296F4EA10002A496 /* AuthViewModel.swift */,
 				3AEFC6B9296F4EC30002A496 /* AuthAssembly.swift */,
 				3AEFC6BB296F4ED40002A496 /* AuthCoordinator.swift */,
-				3AD3A9202992795A007047E4 /* SignUp */,
-				3AD3A92129927A04007047E4 /* SignIn */,
+				3AD3A9202992795A007047E4 /* Login */,
 			);
 			path = Auth;
 			sourceTree = "<group>";
@@ -170,6 +164,7 @@
 				3A610D8A296888EC0002158C /* Assemblies */,
 				3A610D8B296889040002158C /* Coordinator */,
 				3A610D8C296889140002158C /* Flow */,
+				3AC4EEDD299C067E00F81679 /* Binding */,
 				3AB0D23629894F250073C5E8 /* Logic */,
 			);
 			path = Source;
@@ -217,24 +212,20 @@
 			path = AuthorizationApp;
 			sourceTree = "<group>";
 		};
-		3AD3A9202992795A007047E4 /* SignUp */ = {
+		3AC4EEDD299C067E00F81679 /* Binding */ = {
 			isa = PBXGroup;
 			children = (
-				3AD3A92229927BD1007047E4 /* SignUpViewController.swift */,
-				3AD3A92829927E90007047E4 /* SignUpViewModel.swift */,
-				3AD3A92629927E7B007047E4 /* SignUpAssembly.swift */,
+				3AC4EEDB299C063600F81679 /* Observable .swift */,
 			);
-			path = SignUp;
+			path = Binding;
 			sourceTree = "<group>";
 		};
-		3AD3A92129927A04007047E4 /* SignIn */ = {
+		3AD3A9202992795A007047E4 /* Login */ = {
 			isa = PBXGroup;
 			children = (
-				3AD3A92429927BEE007047E4 /* SignInViewController.swift */,
-				3AD3A92A29927EA8007047E4 /* SignInViewModel.swift */,
-				3AD3A92C29927EBC007047E4 /* SignInAssembly.swift */,
+				3AD3A92229927BD1007047E4 /* LoginViewController.swift */,
 			);
-			path = SignIn;
+			path = Login;
 			sourceTree = "<group>";
 		};
 		3AF8C173297E8D1200E5CFB3 /* Main */ = {
@@ -400,24 +391,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3AD3A92729927E7B007047E4 /* SignUpAssembly.swift in Sources */,
 				3AEFC6BC296F4ED40002A496 /* AuthCoordinator.swift in Sources */,
 				3AF8C17B297EAE9600E5CFB3 /* HomeAssembly.swift in Sources */,
-				3AD3A92D29927EBC007047E4 /* SignInAssembly.swift in Sources */,
-				3AD3A92B29927EA8007047E4 /* SignInViewModel.swift in Sources */,
 				3AC1B8422922A8B30017B757 /* AuthViewController.swift in Sources */,
-				3AD3A92929927E90007047E4 /* SignUpViewModel.swift in Sources */,
+				3AC4EEDA299BFD0100F81679 /* AuthState.swift in Sources */,
 				3A610D95296892480002158C /* FlowAssembly.swift in Sources */,
 				3AC1B83E2922A8B30017B757 /* AppDelegate.swift in Sources */,
 				3AF8C17D297EAEC300E5CFB3 /* HomeCoordinator.swift in Sources */,
 				3AEFC6BA296F4EC30002A496 /* AuthAssembly.swift in Sources */,
 				3A610D97296892560002158C /* ServiceAssembly.swift in Sources */,
 				3AD3A9322993E5B7007047E4 /* Route.swift in Sources */,
-				3AD3A92329927BD1007047E4 /* SignUpViewController.swift in Sources */,
+				3AD3A92329927BD1007047E4 /* LoginViewController.swift in Sources */,
 				3AEFC6BE296F57640002A496 /* Coordinator.swift in Sources */,
 				3AF8C179297EAE8200E5CFB3 /* HomeViewModel.swift in Sources */,
+				3AC4EEDC299C063600F81679 /* Observable .swift in Sources */,
 				3AF8C177297EAE6400E5CFB3 /* HomeViewController.swift in Sources */,
-				3AD3A92529927BEE007047E4 /* SignInViewController.swift in Sources */,
 				3AC2D16129955C49008710BE /* Button.swift in Sources */,
 				3AEFC6B8296F4EA20002A496 /* AuthViewModel.swift in Sources */,
 				3A610D93296892080002158C /* AppCoordinator.swift in Sources */,

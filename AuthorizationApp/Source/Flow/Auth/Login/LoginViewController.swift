@@ -1,31 +1,31 @@
 import UIKit
 
-class SignInViewController: UIViewController {
+class LoginViewController: UIViewController {
     
+    private var userName = UITextField()
     private var login = UITextField()
     private var password = UITextField()
-    private var signIn = UIButton()
+    private var createAccountButton = UIButton()
     private var stackView = UIStackView()
     
-    private var viewModel: SignInViewModel!
-
+    private var viewModel: AuthViewModel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        view.backgroundColor = .brown
+        bindState()
+        view.backgroundColor = .darkGray
         configureStackView()
         setupTextField()
-        setupButton()
     }
     
-    func inject(viewModel: SignInViewModel) {
+    func inject(viewModel: AuthViewModel) {
         self.viewModel = viewModel
     }
 }
 
 // MARK: - StackView
 
-extension SignInViewController {
+extension LoginViewController {
     
     func configureStackView() {
         view.addSubview(stackView)
@@ -34,8 +34,9 @@ extension SignInViewController {
         stackView.distribution = .fillEqually
         stackView.spacing = 8.0
         stackView.addArrangedSubview(login)
+        stackView.addArrangedSubview(userName)
         stackView.addArrangedSubview(password)
-        stackView.addArrangedSubview(signIn)
+        stackView.addArrangedSubview(createAccountButton)
         
         setStackViewConstraints()
     }
@@ -50,7 +51,7 @@ extension SignInViewController {
 
 // MARK: - TextField
 
-extension SignInViewController {
+extension LoginViewController {
     
     func configureTextField(textField: UITextField, color: UIColor, placeholder: String) {
         textField.translatesAutoresizingMaskIntoConstraints = false
@@ -64,6 +65,11 @@ extension SignInViewController {
     func setupTextField() {
         
         configureTextField(
+            textField: userName,
+            color: .white,
+            placeholder: "User name")
+        
+        configureTextField(
             textField:
                 login, color: .white,
             placeholder: "Email")
@@ -73,8 +79,36 @@ extension SignInViewController {
             color: .white,
             placeholder: "Password")
     }
+}
+
+// MARK: - Button
+
+extension LoginViewController {
     
-    func setupButton() {
-        signIn.setupButton(color: .systemBlue, title: "Sign in")
+    func setupButton(_ title: String) {
+        createAccountButton.setupButton(color: .systemBlue, title: title)
+    }
+    
+
+}
+
+// MARK: - Bind
+
+extension LoginViewController {
+    
+    func bindState() {
+        viewModel.authState.bind(listener: { state in
+            DispatchQueue.main.async {
+                if state == AuthState.signIn {
+                    self.navigationItem.title = "Sign in"
+                    self.userName.isHidden = true
+                    self.setupButton("Sign in")
+                } else {
+                    self.navigationItem.title = "Sign up"
+                    self.userName.isHidden = false
+                    self.setupButton("Create a new account")
+                }
+            }
+        })
     }
 }

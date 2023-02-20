@@ -9,19 +9,30 @@ class AuthAssembly {}
 extension AuthAssembly: Assembly {
     
     func assemble(container: Container) {
-        container.register(AuthViewController.self) { resolver in
+        container.register(AuthViewController.self) { (resolver, state: Observable<AuthState>) in
             
-            let viewModel = resolver ~> AuthViewModel.self
+            let viewModel = resolver.resolve(AuthViewModel.self, argument: state)!
             let view = AuthViewController()
             view.inject(viewModel: viewModel)
             
             return view
         }
         
-        container.register(AuthViewModel.self) { resolver in
-            let coordinator = resolver ~> AuthCoordinator.self
+        container.register(LoginViewController.self) { (resolver, state: Observable<AuthState>) in
             
-            return AuthViewModel(coordinator: coordinator)
+            let viewModel = resolver.resolve(AuthViewModel.self, argument: state)!
+            let view = LoginViewController()
+            view.inject(viewModel: viewModel)
+            
+            return view
+        }
+        
+        container.register(AuthViewModel.self) { (resolver, state: Observable<AuthState>) in
+            let coordinator = resolver.resolve(AuthCoordinator.self)!
+            
+            return AuthViewModel(
+                coordinator: coordinator,
+                authState: state)
             
         }
     }

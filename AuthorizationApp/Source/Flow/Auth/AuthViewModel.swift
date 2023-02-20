@@ -2,12 +2,16 @@ import Foundation
 import Rswift
 
 class AuthViewModel {
-    
+        
     private weak var coordinator: Coordinator?
+    var authState: Observable<AuthState> = Observable(AuthState.signUp)
         
-    init(coordinator: Coordinator) {
+    init(
+        coordinator: Coordinator,
+        authState: Observable<AuthState>) {
+            
         self.coordinator = coordinator
-        
+        self.authState = authState
     }
 }
 
@@ -27,4 +31,5 @@ extension AuthViewModel {
     func startSignIn() {
         coordinator?.navigate(.signIn)
     }
+    
 }

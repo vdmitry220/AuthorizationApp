@@ -22,7 +22,7 @@ extension AuthCoordinator: Coordinator {
     }
     
     func start() {
-        let authViewController = resolver ~> AuthViewController.self
+        let authViewController = resolver.resolve(AuthViewController.self, argument: Observable(AuthState.signUp))!
         self.navigationController.setViewControllers([authViewController], animated: false)
     }
     
@@ -31,7 +31,7 @@ extension AuthCoordinator: Coordinator {
         case .signUp:
             pushSignUp()
         case .signIn:
-            pushSingIn()
+            pushSignIn()
         default:
             break
         }
@@ -43,12 +43,12 @@ extension AuthCoordinator: Coordinator {
 extension AuthCoordinator {
     
     func pushSignUp() {
-        let signUpViewController = resolver ~> SignUpViewController.self
+        let signUpViewController = resolver.resolve(LoginViewController.self, argument: Observable(AuthState.signUp))!
         self.navigationController.pushViewController(signUpViewController, animated: true)
     }
     
-    func pushSingIn() {
-        let signInViewController = resolver ~> SignInViewController.self
+    func pushSignIn() {
+        let signInViewController = resolver.resolve(LoginViewController.self, argument: Observable(AuthState.signIn))!
         self.navigationController.pushViewController(signInViewController, animated: true)
     }
 }

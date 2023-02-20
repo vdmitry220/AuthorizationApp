@@ -74,7 +74,7 @@ extension AuthViewController {
     }
     
     @objc func signInButtonWasTapped() {
-        viewModel.startSignIn()
+        self.viewModel.startSignIn()
     }
 }
 
