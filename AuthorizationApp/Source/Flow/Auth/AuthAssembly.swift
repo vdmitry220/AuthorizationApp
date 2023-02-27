@@ -29,9 +29,11 @@ extension AuthAssembly: Assembly {
         
         container.register(AuthViewModel.self) { (resolver, state: Observable<AuthState>) in
             let coordinator = resolver.resolve(AuthCoordinator.self)!
+            let userDefaults = resolver.resolve(UserDefaultsService.self)!
             
             return AuthViewModel(
                 coordinator: coordinator,
+                userDefaults: userDefaults,
                 authState: state)
             
         }

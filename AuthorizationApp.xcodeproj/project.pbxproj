@@ -20,6 +20,8 @@
 		3AC4EEDC299C063600F81679 /* Observable .swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC4EEDB299C063600F81679 /* Observable .swift */; };
 		3AD3A92329927BD1007047E4 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD3A92229927BD1007047E4 /* LoginViewController.swift */; };
 		3AD3A9322993E5B7007047E4 /* Route.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD3A9312993E5B7007047E4 /* Route.swift */; };
+		3AD74CA629ACB6E0003879AE /* UserDefaultsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD74CA529ACB6E0003879AE /* UserDefaultsService.swift */; };
+		3AD74CAB29ACBA2E003879AE /* Credentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD74CAA29ACBA2E003879AE /* Credentials.swift */; };
 		3AEFC6B8296F4EA20002A496 /* AuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AEFC6B7296F4EA10002A496 /* AuthViewModel.swift */; };
 		3AEFC6BA296F4EC30002A496 /* AuthAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AEFC6B9296F4EC30002A496 /* AuthAssembly.swift */; };
 		3AEFC6BC296F4ED40002A496 /* AuthCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AEFC6BB296F4ED40002A496 /* AuthCoordinator.swift */; };
@@ -50,6 +52,8 @@
 		3AC4EEDB299C063600F81679 /* Observable .swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Observable .swift"; sourceTree = "<group>"; };
 		3AD3A92229927BD1007047E4 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		3AD3A9312993E5B7007047E4 /* Route.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Route.swift; sourceTree = "<group>"; };
+		3AD74CA529ACB6E0003879AE /* UserDefaultsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsService.swift; sourceTree = "<group>"; };
+		3AD74CAA29ACBA2E003879AE /* Credentials.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Credentials.swift; sourceTree = "<group>"; };
 		3AEFC6B7296F4EA10002A496 /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
 		3AEFC6B9296F4EC30002A496 /* AuthAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthAssembly.swift; sourceTree = "<group>"; };
 		3AEFC6BB296F4ED40002A496 /* AuthCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthCoordinator.swift; sourceTree = "<group>"; };
@@ -166,6 +170,7 @@
 				3A610D8C296889140002158C /* Flow */,
 				3AC4EEDD299C067E00F81679 /* Binding */,
 				3AB0D23629894F250073C5E8 /* Logic */,
+				3AD74CA929ACBA02003879AE /* Models */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -181,6 +186,7 @@
 		3AB0D23629894F250073C5E8 /* Logic */ = {
 			isa = PBXGroup;
 			children = (
+				3AD74CA429ACB6A9003879AE /* UserDefaults */,
 			);
 			path = Logic;
 			sourceTree = "<group>";
@@ -226,6 +232,22 @@
 				3AD3A92229927BD1007047E4 /* LoginViewController.swift */,
 			);
 			path = Login;
+			sourceTree = "<group>";
+		};
+		3AD74CA429ACB6A9003879AE /* UserDefaults */ = {
+			isa = PBXGroup;
+			children = (
+				3AD74CA529ACB6E0003879AE /* UserDefaultsService.swift */,
+			);
+			path = UserDefaults;
+			sourceTree = "<group>";
+		};
+		3AD74CA929ACBA02003879AE /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				3AD74CAA29ACBA2E003879AE /* Credentials.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 		3AF8C173297E8D1200E5CFB3 /* Main */ = {
@@ -403,6 +425,8 @@
 				3AD3A9322993E5B7007047E4 /* Route.swift in Sources */,
 				3AD3A92329927BD1007047E4 /* LoginViewController.swift in Sources */,
 				3AEFC6BE296F57640002A496 /* Coordinator.swift in Sources */,
+				3AD74CA629ACB6E0003879AE /* UserDefaultsService.swift in Sources */,
+				3AD74CAB29ACBA2E003879AE /* Credentials.swift in Sources */,
 				3AF8C179297EAE8200E5CFB3 /* HomeViewModel.swift in Sources */,
 				3AC4EEDC299C063600F81679 /* Observable .swift in Sources */,
 				3AF8C177297EAE6400E5CFB3 /* HomeViewController.swift in Sources */,

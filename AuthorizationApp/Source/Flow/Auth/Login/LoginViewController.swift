@@ -2,7 +2,7 @@ import UIKit
 
 class LoginViewController: UIViewController {
     
-    private var userName = UITextField()
+    private var username = UITextField()
     private var login = UITextField()
     private var password = UITextField()
     private var createAccountButton = UIButton()
@@ -34,7 +34,7 @@ extension LoginViewController {
         stackView.distribution = .fillEqually
         stackView.spacing = 8.0
         stackView.addArrangedSubview(login)
-        stackView.addArrangedSubview(userName)
+        stackView.addArrangedSubview(username)
         stackView.addArrangedSubview(password)
         stackView.addArrangedSubview(createAccountButton)
         
@@ -65,7 +65,7 @@ extension LoginViewController {
     func setupTextField() {
         
         configureTextField(
-            textField: userName,
+            textField: username,
             color: .white,
             placeholder: "User name")
         
@@ -88,8 +88,6 @@ extension LoginViewController {
     func setupButton(_ title: String) {
         createAccountButton.setupButton(color: .systemBlue, title: title)
     }
-    
-
 }
 
 // MARK: - Bind
@@ -101,11 +99,11 @@ extension LoginViewController {
             DispatchQueue.main.async {
                 if state == AuthState.signIn {
                     self.navigationItem.title = "Sign in"
-                    self.userName.isHidden = true
+                    self.username.isHidden = true
                     self.setupButton("Sign in")
                 } else {
                     self.navigationItem.title = "Sign up"
-                    self.userName.isHidden = false
+                    self.username.isHidden = false
                     self.setupButton("Create a new account")
                 }
             }
