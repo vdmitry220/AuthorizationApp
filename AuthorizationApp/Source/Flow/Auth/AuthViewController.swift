@@ -52,6 +52,7 @@ extension AuthViewController {
     func setupSignUpBotton() {
         signUp.setupButton(
             color: .clear,
+            borderColor: .black,
             title: "Sign up with email")
         
         signUp.addTarget(
@@ -61,6 +62,7 @@ extension AuthViewController {
         
         signIn.setupButton(
             color: .clear,
+            borderColor: .black,
             title: "Sign in")
         
         signIn.addTarget(
@@ -77,4 +79,5 @@ extension AuthViewController {
         self.viewModel.startSignIn()
     }
 }
+
 
