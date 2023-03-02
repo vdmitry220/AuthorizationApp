@@ -4,7 +4,7 @@ import Rswift
 class AuthViewModel {
     
     private weak var coordinator: Coordinator?
-    private weak var userDefaults: UserDefaultsService?
+    private weak var userDataService: UserDataService?
     
     var authState: Observable<AuthState> = Observable(AuthState.signUp)
     
@@ -25,18 +25,17 @@ class AuthViewModel {
     
     init(
         coordinator: Coordinator,
-        userDefaults: UserDefaultsService,
+        userDataService: UserDataService,
         authState: Observable<AuthState>) {
             
             self.coordinator = coordinator
-            self.userDefaults = userDefaults
             self.authState = authState
+            self.userDataService = userDataService
         }
 }
 
-
-
 extension AuthViewModel {
+    
     
 }
 
@@ -62,8 +61,7 @@ extension AuthViewModel {
     }
     
     func signIn() {
-        userDefaults?.save(credentials, for: .credentials)
-        print((userDefaults?.value(for: .credentials))! as Credentials)
+        userDataService?.credentials = credentials
     }
 }
 

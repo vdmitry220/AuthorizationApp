@@ -17,7 +17,7 @@ protocol UserDefaultsService: AnyObject {
     
     func save<Value: Codable>(_ value: Value?, for key: UserDefaultsKey)
     
-    func value<Value: Codable>(for key: UserDefaultsKey) -> Value?
+    func value<Value: Codable>(type: Value.Type, for key: UserDefaultsKey) -> Value?
     
     func removeValue(for key: UserDefaultsKey)
 }
@@ -40,8 +40,8 @@ extension UserDefaultsServiceImp: UserDefaultsService {
         }
     }
 
-    
     func save<Value: Codable>(_ value: Value?, for key: UserDefaultsKey) {
+        
             if let value = value {
                 save(value, for: key)
             } else {
@@ -49,15 +49,13 @@ extension UserDefaultsServiceImp: UserDefaultsService {
             }
         }
 
-    
-    func value<Value: Codable>(for key: UserDefaultsKey) -> Value? {
-            if let data = defaults.object(forKey: key.stringValue) as? Data,
-                let value = try? JSONDecoder().decode(Value.self, from: data) {
-                return value
+    func value<Value: Codable>(type: Value.Type, for key: UserDefaultsKey) -> Value? {
+            if let data = defaults.value(forKey: key.stringValue) as? Data,
+               let value = try? JSONDecoder().decode(type.self, from: data) {
+                return value 
             }
             return nil
         }
-
     
     func removeValue(for key: UserDefaultsKey) {
         defaults.removeObject(forKey: key.stringValue)

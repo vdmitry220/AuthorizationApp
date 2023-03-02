@@ -100,10 +100,8 @@ extension LoginViewController {
     }
     
     @objc func loginButtonPressed() {
-        //Here we ask viewModel to update model with existing credentials from text fields
         viewModel.updateCredentials(username: loginTextField.text!, password: passwordTextField.text!)
         
-        //Here we check user's credentials input - if it's correct we call login()
         switch viewModel.credentialsInput() {
             
         case .Correct:
@@ -157,7 +155,6 @@ extension LoginViewController {
         
         viewModel.errorMessage.bind {
             guard let errorMessage = $0 else { return }
-            //Handle presenting of error message (e.g. UIAlertController)
         }
     }
     

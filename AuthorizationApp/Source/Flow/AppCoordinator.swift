@@ -7,13 +7,22 @@ import Rswift
 class AppCoordinator {
     
     private let resolver: Resolver
+    private let sessionService: SessionService
     
     let tabBarController = UITabBarController()
+        
+    var initialStep: Bool {
+        if sessionService.isSessionExpired() {
+            sessionService.clearSession()
+            return false
+        } else {
+            return true
+        }
+    }
     
-    var isLoggedIn: Bool = false
-    
-    init(resolver: Resolver) {
+    init(resolver: Resolver, sessionService: SessionService) {
         self.resolver = resolver
+        self.sessionService = sessionService
     }
 }
 
@@ -26,7 +35,7 @@ extension AppCoordinator: Coordinator {
     }
     
     func start() {
-        if isLoggedIn == true {
+        if initialStep == true {
             showMainView()
         } else {
             showAuthView()
@@ -58,7 +67,7 @@ extension AppCoordinator {
     func setRoot() -> UIViewController {
         let authCoordinator = resolver ~> AuthCoordinator.self
         
-        if isLoggedIn == true {
+        if initialStep == true {
             return tabBarController
         } else {
             return authCoordinator.root

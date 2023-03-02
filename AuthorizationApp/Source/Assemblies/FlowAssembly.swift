@@ -12,7 +12,9 @@ extension FlowAssembly: Assembly {
     func assemble(container: Container) {
         
         container.register(AppCoordinator.self) { (resolver) in
-            AppCoordinator(resolver: resolver)
+            AppCoordinator(
+                resolver: resolver,
+                sessionService: resolver~>)
         }.inObjectScope(.container)
         
         container.register(AuthCoordinator.self) { (resolver) in
