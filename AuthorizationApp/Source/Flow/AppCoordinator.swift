@@ -8,19 +8,31 @@ class AppCoordinator {
     
     private let resolver: Resolver
     private let sessionService: SessionService
+    var window: UIWindow?
     
     let tabBarController = UITabBarController()
+    var rootViewController: UIViewController {
+        get {
+            window?.rootViewController ?? UIViewController()
+        }
+        set {
+            window?.rootViewController = newValue
+        }
+    }
         
-    var initialStep: Bool {
+    var initialRoute: Route {
         if sessionService.isSessionExpired() {
             sessionService.clearSession()
-            return false
+            return .auth
         } else {
-            return true
+            return .home
         }
     }
     
-    init(resolver: Resolver, sessionService: SessionService) {
+    init(
+        resolver: Resolver,
+        sessionService: SessionService) {
+            
         self.resolver = resolver
         self.sessionService = sessionService
     }
@@ -35,15 +47,18 @@ extension AppCoordinator: Coordinator {
     }
     
     func start() {
-        if initialStep == true {
-            showMainView()
-        } else {
-            showAuthView()
-        }
+        navigate(initialRoute)
     }
     
     func navigate(_ route: Route) {
-        
+        switch route {
+        case .auth:
+            showAuthView()
+        case .home:
+            showHomeView()
+        default:
+            break
+        }
     }
 }
 
@@ -51,27 +66,26 @@ extension AppCoordinator: Coordinator {
 
 extension AppCoordinator {
     
-    func showMainView() {
+    func showHomeView() {
         let homeCoordinator = resolver ~> HomeCoordinator.self
+        let profileCoordinator = resolver ~> ProfileCoordinator.self
         
-        self.tabBarController.setViewControllers([homeCoordinator.root], animated: false)
+        self.tabBarController.setViewControllers([homeCoordinator.root, profileCoordinator.root], animated: false)
         homeCoordinator.start()
-        setupTapBar(with: [homeCoordinator.root])
+        profileCoordinator.start()
+        setupTapBar(with: [homeCoordinator.root, profileCoordinator.root])
+        rootViewController = tabBarController
     }
     
     func showAuthView() {
         let authCoordinator = resolver ~> AuthCoordinator.self
         authCoordinator.start()
+        rootViewController = authCoordinator.root
+        authCoordinator.finishFlow = { self.navigate($0) }
     }
     
     func setRoot() -> UIViewController {
-        let authCoordinator = resolver ~> AuthCoordinator.self
-        
-        if initialStep == true {
-            return tabBarController
-        } else {
-            return authCoordinator.root
-        }
+        rootViewController
     }
 }
 
@@ -81,5 +95,6 @@ private extension AppCoordinator {
     
     func setupTapBar(with viewControllers: [UIViewController]) {
         viewControllers.first?.tabBarItem = UITabBarItem(title: "Home", image: .actions, tag: 0)
+        viewControllers.last?.tabBarItem = UITabBarItem(title: "Profile", image: .checkmark, tag: 1)
     }
 }

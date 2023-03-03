@@ -7,6 +7,7 @@ class AuthCoordinator {
     
     private let resolver: Resolver
     let navigationController = UINavigationController()
+    var finishFlow: ((Route)->())?
     
     init(resolver: Resolver) {
         self.resolver = resolver
@@ -32,6 +33,8 @@ extension AuthCoordinator: Coordinator {
             pushSignUp()
         case .signIn:
             pushSignIn()
+        case .home:
+            finishFlow?(route)
         default:
             break
         }
@@ -50,5 +53,9 @@ extension AuthCoordinator {
     func pushSignIn() {
         let signInViewController = resolver.resolve(LoginViewController.self, argument: Observable(AuthState.signIn))!
         self.navigationController.pushViewController(signInViewController, animated: true)
+    }
+    
+    func pushHome() {
+        
     }
 }

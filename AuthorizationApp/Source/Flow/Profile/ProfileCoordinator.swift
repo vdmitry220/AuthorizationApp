@@ -2,7 +2,7 @@ import Foundation
 import Swinject
 import SwinjectAutoregistration
 
-class HomeCoordinator {
+class ProfileCoordinator {
     
     private let resolver: Resolver
     let navigationController = UINavigationController()
@@ -14,19 +14,24 @@ class HomeCoordinator {
 
 // MARK: - Start
 
-extension HomeCoordinator: Coordinator {
+extension ProfileCoordinator: Coordinator {
     
     var root: UIViewController {
         self.navigationController
     }
     
     func start() {
-        let homeViewController = resolver ~> HomeViewController.self
         let profileViewController = resolver ~> ProfileViewController.self
-        self.navigationController.setViewControllers([homeViewController], animated: false)
+        self.navigationController.setViewControllers([profileViewController], animated: false)
     }
     
     func navigate(_ route: Route) {
-        
+
     }
+}
+
+// MARK: - Navigate
+
+extension ProfileCoordinator {
+
 }

@@ -62,6 +62,7 @@ extension AuthViewModel {
     
     func signIn() {
         userDataService?.credentials = credentials
+        coordinator?.navigate(.home)
     }
 }
 

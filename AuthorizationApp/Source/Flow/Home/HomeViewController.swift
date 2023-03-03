@@ -8,7 +8,7 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.view.backgroundColor = .green
+        self.view.backgroundColor = .systemCyan
     }
     
     func inject(viewModel: HomeViewModel) {

@@ -24,5 +24,9 @@ extension FlowAssembly: Assembly {
         container.register(HomeCoordinator.self) { (resolver) in
             HomeCoordinator(resolver: resolver)
         }.inObjectScope(.container)
+        
+        container.register(ProfileCoordinator.self) { (resolver) in
+            ProfileCoordinator(resolver: resolver)
+        }.inObjectScope(.container)
     }
 }

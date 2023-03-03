@@ -18,12 +18,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 }
 
 extension AppDelegate {
+    
     func configureDependencies() {
         let serviceAssembler = Assembler([ServiceAssembly()])
         let modulesAssembler = Assembler(
             [
                 AuthAssembly(),
-                HomeAssembly()
+                HomeAssembly(),
+                ProfileAssembly()
             ],
             parent: serviceAssembler)
         
@@ -35,10 +37,11 @@ extension AppDelegate {
     func configureFlow() {
         let window = UIWindow()
         let coordinator = assembler.resolver ~> AppCoordinator.self
+        coordinator.window = window
         coordinator.start()
         
         self.window = window
-        self.window?.rootViewController = coordinator.root
+        window.rootViewController = coordinator.root
         self.window?.makeKeyAndVisible()
     }
 }
