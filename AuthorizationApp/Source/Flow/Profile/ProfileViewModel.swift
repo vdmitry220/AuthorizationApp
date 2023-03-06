@@ -17,8 +17,10 @@ class ProfileViewModel {
 // MARK: - Navigate
 
 extension ProfileViewModel {
+    
     func logOut() {
         userDataService?.credentials = nil
+        coordinator?.navigate(.auth)
     }
 }
 

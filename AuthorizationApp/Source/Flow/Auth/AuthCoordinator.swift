@@ -54,8 +54,4 @@ extension AuthCoordinator {
         let signInViewController = resolver.resolve(LoginViewController.self, argument: Observable(AuthState.signIn))!
         self.navigationController.pushViewController(signInViewController, animated: true)
     }
-    
-    func pushHome() {
-        
-    }
 }

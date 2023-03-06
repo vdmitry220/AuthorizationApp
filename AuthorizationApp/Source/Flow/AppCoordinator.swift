@@ -6,9 +6,9 @@ import Rswift
 
 class AppCoordinator {
     
+    var window: UIWindow?
     private let resolver: Resolver
     private let sessionService: SessionService
-    var window: UIWindow?
     
     let tabBarController = UITabBarController()
     var rootViewController: UIViewController {
@@ -75,6 +75,7 @@ extension AppCoordinator {
         profileCoordinator.start()
         setupTapBar(with: [homeCoordinator.root, profileCoordinator.root])
         rootViewController = tabBarController
+        profileCoordinator.finishFlow = { self.navigate($0) }
     }
     
     func showAuthView() {

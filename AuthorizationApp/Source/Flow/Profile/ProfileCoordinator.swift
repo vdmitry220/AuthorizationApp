@@ -7,6 +7,8 @@ class ProfileCoordinator {
     private let resolver: Resolver
     let navigationController = UINavigationController()
     
+    var finishFlow: ((Route)->())?
+    
     init(resolver: Resolver) {
         self.resolver = resolver
     }
@@ -26,12 +28,15 @@ extension ProfileCoordinator: Coordinator {
     }
     
     func navigate(_ route: Route) {
-
+        switch route {
+        case .auth:
+            finishFlow?(route)
+        default:
+            break
+        }
     }
 }
 
 // MARK: - Navigate
 
-extension ProfileCoordinator {
-
-}
+extension ProfileCoordinator {}
