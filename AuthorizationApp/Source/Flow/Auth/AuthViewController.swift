@@ -3,8 +3,15 @@ import UIKit
 class AuthViewController: UIViewController {
     
     private var stackView = UIStackView()
-    private var signUp = UIButton()
-    private var signIn = UIButton()
+    private var signUp = CustomButton(
+        title: "Sign up with email",
+        color: .clear,
+        borderColor: .black)
+    
+    private var signIn = CustomButton(
+        title: "Sign in",
+        color: .clear,
+        borderColor: .black)
     
     private var viewModel: AuthViewModel!
     
@@ -50,20 +57,11 @@ extension AuthViewController {
 extension AuthViewController {
     
     func setupSignUpBotton() {
-        signUp.setupButton(
-            color: .clear,
-            borderColor: .black,
-            title: "Sign up with email")
         
         signUp.addTarget(
             self,
             action: #selector(signUpButtonWasTapped),
             for: .touchUpInside)
-        
-        signIn.setupButton(
-            color: .clear,
-            borderColor: .black,
-            title: "Sign in")
         
         signIn.addTarget(
             self,

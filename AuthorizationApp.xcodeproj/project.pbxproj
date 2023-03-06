@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3A10350C29B5F79A00248275 /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A10350B29B5F79A00248275 /* CustomButton.swift */; };
 		3A610D93296892080002158C /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A610D92296892080002158C /* AppCoordinator.swift */; };
 		3A610D95296892480002158C /* FlowAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A610D94296892480002158C /* FlowAssembly.swift */; };
 		3A610D97296892560002158C /* ServiceAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A610D96296892560002158C /* ServiceAssembly.swift */; };
@@ -43,6 +44,7 @@
 		27E51FB5CA08460500247BF2 /* Pods-AuthorizationApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AuthorizationApp.debug.xcconfig"; path = "Target Support Files/Pods-AuthorizationApp/Pods-AuthorizationApp.debug.xcconfig"; sourceTree = "<group>"; };
 		34C37A5B1E6B7C507B991B36 /* Pods_AuthorizationApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AuthorizationApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		38A29DDFEA6BA33CC421CAEF /* Pods-AuthorizationApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AuthorizationApp.release.xcconfig"; path = "Target Support Files/Pods-AuthorizationApp/Pods-AuthorizationApp.release.xcconfig"; sourceTree = "<group>"; };
+		3A10350B29B5F79A00248275 /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
 		3A610D92296892080002158C /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		3A610D94296892480002158C /* FlowAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlowAssembly.swift; sourceTree = "<group>"; };
 		3A610D96296892560002158C /* ServiceAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceAssembly.swift; sourceTree = "<group>"; };
@@ -88,6 +90,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3A10350829B5E7AE00248275 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				3A10350B29B5F79A00248275 /* CustomButton.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
 		3A610D89296888B90002158C /* AppDelegate */ = {
 			isa = PBXGroup;
 			children = (
@@ -184,6 +194,7 @@
 				3AC4EEDD299C067E00F81679 /* Binding */,
 				3AB0D23629894F250073C5E8 /* Logic */,
 				3AD74CA929ACBA02003879AE /* Models */,
+				3A10350829B5E7AE00248275 /* Components */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -451,6 +462,7 @@
 				3AF8C17B297EAE9600E5CFB3 /* HomeAssembly.swift in Sources */,
 				3AC1B8422922A8B30017B757 /* AuthViewController.swift in Sources */,
 				3AC4EEDA299BFD0100F81679 /* AuthState.swift in Sources */,
+				3A10350C29B5F79A00248275 /* CustomButton.swift in Sources */,
 				3A610D95296892480002158C /* FlowAssembly.swift in Sources */,
 				3AE667B329AE7D3200EDE6BF /* UserDataService.swift in Sources */,
 				3AE667B629B0E2A300EDE6BF /* ProfileViewModel.swift in Sources */,

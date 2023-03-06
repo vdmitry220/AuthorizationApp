@@ -4,7 +4,12 @@ class LoginViewController: UIViewController {
     
     private var loginTextField = UITextField()
     private var passwordTextField = UITextField()
-    private var loginButton = UIButton()
+    
+    private var loginButton = CustomButton(
+        title: "",
+        color: .clear,
+        borderColor: .clear)
+    
     private var loginErrorDescriptionLabel = UILabel()
     private var stackView = UIStackView()
     
@@ -107,6 +112,7 @@ extension LoginViewController {
         case .Correct:
             login()
         case .Incorrect:
+            loginButton.shake()
             return
         }
     }
@@ -160,9 +166,9 @@ extension LoginViewController {
     
     func highlightTextField(_ textField: UITextField) {
         textField.resignFirstResponder()
+        textField.layer.cornerRadius = 3
         textField.layer.borderWidth = 1.0
         textField.layer.borderColor = UIColor.red.cgColor
-        textField.layer.cornerRadius = 3
     }
 }
 
@@ -177,8 +183,8 @@ extension LoginViewController: UITextFieldDelegate {
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        loginTextField.layer.borderWidth = 0
-        passwordTextField.layer.borderWidth = 0
+        loginTextField.layer.borderWidth = 1.0
+        passwordTextField.layer.borderWidth = 1.0
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
