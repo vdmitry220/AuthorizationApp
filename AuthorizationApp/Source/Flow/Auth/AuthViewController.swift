@@ -3,6 +3,7 @@ import UIKit
 class AuthViewController: UIViewController {
     
     private var stackView = UIStackView()
+    
     private var signUp = CustomButton(
         title: "Sign up with email",
         color: .clear,
@@ -17,14 +18,22 @@ class AuthViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .gray
-        
-        setupSignUpBotton()
-        configureStackView()
+        setup()
     }
     
     func inject(viewModel: AuthViewModel) {
         self.viewModel = viewModel
+    }
+}
+
+// MARK: - AuthViewController
+
+extension AuthViewController {
+    
+    func setup() {
+        view.backgroundColor = .gray
+        setupSignUpBotton()
+        configureStackView()
     }
 }
 

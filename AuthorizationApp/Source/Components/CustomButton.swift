@@ -7,21 +7,21 @@ class CustomButton: UIButton {
     private var color: UIColor
     private var borderColor: UIColor
     
-    private var radius: CGFloat = 8.0
-    private var borderWidth: CGFloat = 1.0
-        
+    private var radius = 8.0
+    private var borderWidth = 1.0
+    
     init(
         title: String,
         color: UIColor,
         borderColor: UIColor) {
             
-        self.title = title
-        self.color = color
-        self.borderColor = borderColor
+            self.title = title
+            self.color = color
+            self.borderColor = borderColor
             
-        super.init(frame: .zero)
-        setup()
-    }
+            super.init(frame: .zero)
+            setup()
+        }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -32,7 +32,6 @@ class CustomButton: UIButton {
         backgroundColor = color
         layer.borderWidth = borderWidth
         layer.cornerRadius = radius
-        
     }
 }
 
@@ -42,8 +41,7 @@ extension CustomButton {
     
     func setIcon(image: UIImage) {
         self.setImage(image, for: .normal)
-        var configuration = UIButton.Configuration.plain()
-        configuration.imagePlacement = .trailing
+        self.contentHorizontalAlignment = .left
     }
 }
 
@@ -69,3 +67,5 @@ extension CustomButton {
         layer.add(shake, forKey: "position")
     }
 }
+
+
