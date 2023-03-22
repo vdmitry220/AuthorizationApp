@@ -4,6 +4,7 @@ class LoginViewController: UIViewController {
     
     private var loginTextField = UITextField()
     private var passwordTextField = UITextField()
+    private var usernameTextField = UITextField()
     
     private var loginButton = CustomButton(
         title: "",
@@ -41,9 +42,13 @@ extension LoginViewController {
         stackView.distribution = .fillEqually
         stackView.spacing = 8.0
         stackView.addArrangedSubview(loginErrorDescriptionLabel)
-        stackView.addArrangedSubview(loginTextField)
-        stackView.addArrangedSubview(passwordTextField)
-        stackView.addArrangedSubview(loginButton)
+        [
+            usernameTextField,
+            loginTextField,
+            passwordTextField,
+            loginButton
+        ]
+            .forEach { stackView.addArrangedSubview($0) }
         
         setStackViewConstraints()
     }
@@ -80,11 +85,17 @@ extension LoginViewController {
             textField: passwordTextField,
             color: .white,
             placeholder: "Password")
+        
+        configureTextField(
+            textField: usernameTextField,
+            color: .white,
+            placeholder: "Username")
     }
     
     func setDelegates() {
         loginTextField.delegate = self
         passwordTextField.delegate = self
+        usernameTextField.delegate = self
     }
 }
 
@@ -105,7 +116,11 @@ extension LoginViewController {
     }
     
     @objc func loginButtonPressed() {
-        viewModel.updateCredentials(username: loginTextField.text!, password: passwordTextField.text!)
+        viewModel.updateCredentials(
+            login: loginTextField.text!,
+            password: passwordTextField.text!,
+            username: usernameTextField.text!
+        )
         
         switch viewModel.credentialsInput() {
             
@@ -118,7 +133,15 @@ extension LoginViewController {
     }
     
     func login() {
-        viewModel.signIn()
+        viewModel.authState.bind(listener: { state in
+            DispatchQueue.main.async {
+                if state == .signUp {
+                    self.viewModel.createUser()
+                } else {
+                    self.viewModel.signIn()
+                }
+            }
+        })
     }
 }
 
@@ -129,9 +152,10 @@ extension LoginViewController {
     func bindState() {
         viewModel.authState.bind(listener: { state in
             DispatchQueue.main.async {
-                if state == AuthState.signIn {
+                if state == .signIn {
                     self.navigationItem.title = "Sign in"
                     self.setupButton("Sign in")
+                    self.usernameTextField.isHidden = true
                 } else {
                     self.navigationItem.title = "Sign up"
                     self.setupButton("Create a new account")
@@ -151,12 +175,16 @@ extension LoginViewController {
             self?.loginErrorDescriptionLabel.text = $0
         }
         
-        viewModel.isUsernameTextFieldHighLighted.bind { [weak self] in
+        viewModel.isLoginTextFieldHighLighted.bind { [weak self] in
             if $0 { self?.highlightTextField(self!.loginTextField)}
         }
         
         viewModel.isPasswordTextFieldHighLighted.bind { [weak self] in
             if $0 { self?.highlightTextField(self!.passwordTextField)}
+        }
+        
+        viewModel.isUsernameTextFieldHighLighted.bind{ [weak self] in
+            if $0 { self?.highlightTextField(self!.usernameTextField)}
         }
         
         viewModel.errorMessage.bind {
@@ -179,15 +207,19 @@ extension LoginViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         loginTextField.resignFirstResponder()
         passwordTextField.resignFirstResponder()
+        usernameTextField.resignFirstResponder()
         return true
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
         loginTextField.layer.borderWidth = 1.0
         passwordTextField.layer.borderWidth = 1.0
+        usernameTextField.layer.borderWidth = 1.0
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
     }
 }
+
+

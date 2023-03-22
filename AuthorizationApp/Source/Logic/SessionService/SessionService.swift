@@ -10,10 +10,15 @@ protocol SessionService {
 class SessionServiceImp {
     
     private let userData: UserDataService
+    private let authorizationService: AuthorizationService
     private let sessionExpiredSubject = PublishSubject<()>()
     
-    init(userDefaults: UserDataService) {
+    init(
+        userDefaults: UserDataService,
+         authorizationService: AuthorizationService)
+    {
         self.userData = userDefaults
+        self.authorizationService = authorizationService
     }
 }
 
@@ -22,7 +27,7 @@ class SessionServiceImp {
 extension SessionServiceImp: SessionService {
 
     func isSessionExpired() -> Bool {
-        let isSessionUserExist = userData.credentials == nil
+        let isSessionUserExist = userData.credentials == nil || authorizationService.user == nil
         return isSessionUserExist
     }
     

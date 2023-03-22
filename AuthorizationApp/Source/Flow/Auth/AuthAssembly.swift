@@ -33,6 +33,7 @@ extension AuthAssembly: Assembly {
             return AuthViewModel(
                 coordinator: coordinator,
                 userDataService: resolver~>,
+                authorizationService: resolver~>,
                 authState: state)
             
         }

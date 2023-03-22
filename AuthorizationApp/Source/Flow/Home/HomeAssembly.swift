@@ -21,8 +21,10 @@ extension HomeAssembly: Assembly {
         container.register(HomeViewModel.self) { resolver in
             let coordinator = resolver ~> HomeCoordinator.self
             
-            return HomeViewModel(coordinator: coordinator)
-            
+            return HomeViewModel(
+                coordinator: coordinator,
+                authorizationService: resolver~>
+            )
         }
     }
 }

@@ -4,13 +4,20 @@ import Rswift
 class HomeViewModel {
     
     private weak var coordinator: Coordinator?
+    private weak var authorizationService: AuthorizationService?
     
-    init(coordinator: Coordinator) {
+    init(
+        coordinator: Coordinator,
+        authorizationService: AuthorizationService
+    ){
         self.coordinator = coordinator
+        self.authorizationService = authorizationService
     }
 }
 
-extension HomeViewModel {
-    
-    
-}
+// MARK: HomeViewModel
+
+extension HomeViewModel {}
+
+
+

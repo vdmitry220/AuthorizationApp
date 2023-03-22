@@ -22,7 +22,8 @@ extension ProfileAssembly: Assembly {
             
             return ProfileViewModel(
                 coordinator: coortinator,
-                userDataService: resolver~>)
+                userDataService: resolver~>,
+                authorizationService: resolver~>)
         }
     }
 }

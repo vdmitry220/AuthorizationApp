@@ -11,6 +11,7 @@ extension ServiceAssembly: Assembly {
         assembleUserDefaults(container: container)
         assemblyUserDataService(container: container)
         assemblySessionService(container: container)
+        assembleAuthorizationService(container: container)
     }
 }
 
@@ -28,6 +29,10 @@ private extension ServiceAssembly {
 
     func assembleUserDefaults(container: Container) {
         container.autoregister(UserDefaultsService.self, initializer: UserDefaultsServiceImp.init).inObjectScope(.container)
+    }
+    
+    func assembleAuthorizationService(container: Container) {
+        container.autoregister(AuthorizationService.self, initializer: AuthorizationServiceImp.init).inObjectScope(.container)
     }
 }
 
