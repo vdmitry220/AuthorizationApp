@@ -70,7 +70,7 @@ extension AuthViewModel {
         if isPasswordValid(credentials.password) {
             authorizationService?.createNewAccount(with: credentials) { user, error in
                 if error != nil {
-                    print(error)
+                    self.credentialsInputErrorMessage.value = error ?? ""
                 } else {
                     self.signIn()
                 }
@@ -87,7 +87,7 @@ extension AuthViewModel {
                     self.userDataService?.credentials = self.credentials
                     self.startHome()
                 } else {
-                    print("User not found")
+                    self.credentialsInputErrorMessage.value = error ?? ""
                 }
             }
         }
@@ -146,7 +146,4 @@ extension AuthViewModel {
         let passwordTest = NSPredicate(format: "SELF MATCHES %@", "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,}$")
         return passwordTest.evaluate(with: password)
     }
-    
-    
-
 }

@@ -5,24 +5,21 @@ class LoginViewController: UIViewController {
     private var loginTextField = UITextField()
     private var passwordTextField = UITextField()
     private var usernameTextField = UITextField()
-    
+    private var loginErrorDescriptionLabel = UILabel()
+    private var stackView = UIStackView()
+
     private var loginButton = CustomButton(
         title: "",
         color: .clear,
         borderColor: .clear)
-    
-    private var loginErrorDescriptionLabel = UILabel()
-    private var stackView = UIStackView()
     
     private var viewModel: AuthViewModel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .darkGray
+        setup()
         bindState()
-        configureStackView()
-        setupTextField()
-        setDelegates()
         bindData()
     }
     
@@ -31,7 +28,19 @@ class LoginViewController: UIViewController {
     }
 }
 
-// MARK: - StackView
+// MARK: - LoginViewController
+
+extension LoginViewController {
+    
+    func setup() {
+        configureStackView()
+        setupTextField()
+        setDelegates()
+        setupLabel()
+    }
+}
+
+// MARK: - UIStackView
 
 extension LoginViewController {
     
@@ -61,7 +70,7 @@ extension LoginViewController {
     }
 }
 
-// MARK: - TextField
+// MARK: - UITextField
 
 extension LoginViewController {
     
@@ -97,9 +106,39 @@ extension LoginViewController {
         passwordTextField.delegate = self
         usernameTextField.delegate = self
     }
+    
+    
+    func highlightTextField(_ textField: UITextField) {
+        textField.resignFirstResponder()
+        textField.layer.cornerRadius = 3
+        textField.layer.borderWidth = 1.0
+        textField.layer.borderColor = UIColor.red.cgColor
+    }
 }
 
-// MARK: - Button
+// MARK: - UITextFieldDelegate
+
+extension LoginViewController: UITextFieldDelegate {
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        loginTextField.resignFirstResponder()
+        passwordTextField.resignFirstResponder()
+        usernameTextField.resignFirstResponder()
+        return true
+    }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        loginTextField.layer.borderWidth = 1.0
+        passwordTextField.layer.borderWidth = 1.0
+        usernameTextField.layer.borderWidth = 1.0
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+    }
+}
+
+// MARK: - CustomButton
 
 extension LoginViewController {
     
@@ -131,41 +170,19 @@ extension LoginViewController {
             return
         }
     }
-    
-    func login() {
-        viewModel.authState.bind(listener: { state in
-            DispatchQueue.main.async {
-                if state == .signUp {
-                    self.viewModel.createUser()
-                } else {
-                    self.viewModel.signIn()
-                }
-            }
-        })
-    }
 }
 
-// MARK: - Bind
+// MARK: - UILabel
 
 extension LoginViewController {
     
-    func bindState() {
-        viewModel.authState.bind(listener: { state in
-            DispatchQueue.main.async {
-                if state == .signIn {
-                    self.navigationItem.title = "Sign in"
-                    self.setupButton("Sign in")
-                    self.usernameTextField.isHidden = true
-                } else {
-                    self.navigationItem.title = "Sign up"
-                    self.setupButton("Create a new account")
-                }
-            }
-        })
+    func setupLabel() {
+        loginErrorDescriptionLabel.numberOfLines = 0
+        loginErrorDescriptionLabel.textColor = .systemRed
     }
 }
 
-// MARK: - BindData
+// MARK: - Binding
 
 extension LoginViewController {
     
@@ -192,34 +209,34 @@ extension LoginViewController {
         }
     }
     
-    func highlightTextField(_ textField: UITextField) {
-        textField.resignFirstResponder()
-        textField.layer.cornerRadius = 3
-        textField.layer.borderWidth = 1.0
-        textField.layer.borderColor = UIColor.red.cgColor
+    func bindState() {
+        viewModel.authState.bind(listener: { state in
+            DispatchQueue.main.async {
+                if state == .signIn {
+                    self.navigationItem.title = "Sign in"
+                    self.setupButton("Sign in")
+                    self.usernameTextField.isHidden = true
+                } else {
+                    self.navigationItem.title = "Sign up"
+                    self.setupButton("Create a new account")
+                }
+            }
+        })
+    }
+    
+    func login() {
+        viewModel.authState.bind(listener: { state in
+            DispatchQueue.main.async {
+                if state == .signUp {
+                    self.viewModel.createUser()
+                } else {
+                    self.viewModel.signIn()
+                }
+            }
+        })
     }
 }
 
-// MARK: - UITextFieldDelegate
 
-extension LoginViewController: UITextFieldDelegate {
-    
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        loginTextField.resignFirstResponder()
-        passwordTextField.resignFirstResponder()
-        usernameTextField.resignFirstResponder()
-        return true
-    }
-    
-    func textFieldDidBeginEditing(_ textField: UITextField) {
-        loginTextField.layer.borderWidth = 1.0
-        passwordTextField.layer.borderWidth = 1.0
-        usernameTextField.layer.borderWidth = 1.0
-    }
-    
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        self.view.endEditing(true)
-    }
-}
 
 

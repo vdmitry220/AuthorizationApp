@@ -1,24 +1,27 @@
 import UIKit
+import AVFoundation
 
 class AuthViewController: UIViewController {
     
     private var stackView = UIStackView()
+    private var player: AVPlayer?
     
     private var signUp = CustomButton(
         title: "Sign up with email",
         color: .clear,
-        borderColor: .black)
+        borderColor: .white)
     
     private var signIn = CustomButton(
         title: "Sign in",
         color: .clear,
-        borderColor: .black)
+        borderColor: .white)
     
     private var viewModel: AuthViewModel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
+        playBackgroundVideo()
     }
     
     func inject(viewModel: AuthViewModel) {
@@ -35,9 +38,27 @@ extension AuthViewController {
         setupSignUpBotton()
         configureStackView()
     }
+    
+    func playBackgroundVideo() {
+        guard let path = Bundle.main.path(forResource: "background", ofType: ".mp4") else { return }
+        player = AVPlayer(url: URL(fileURLWithPath: path))
+        player?.actionAtItemEnd = AVPlayer.ActionAtItemEnd.none
+        let palyerLayer = AVPlayerLayer(player: player)
+        palyerLayer.frame = self.view.frame
+        palyerLayer.videoGravity = AVLayerVideoGravity.resizeAspectFill
+        self.view.layer.insertSublayer(palyerLayer, at: 0)
+        NotificationCenter.default.addObserver(self, selector: #selector(palayVideo), name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: player?.currentItem)
+        player?.seek(to: CMTime.zero)
+        player?.play()
+        self.player?.isMuted = true
+    }
+    
+    @objc func palayVideo() {
+        player?.seek(to: CMTime.zero)
+    }
 }
 
-// MARK: - StackView
+// MARK: - UIStackView
 
 extension AuthViewController {
     
@@ -61,7 +82,7 @@ extension AuthViewController {
     }
 }
 
-// MARK: - Buttons
+// MARK: - CustomButtons
 
 extension AuthViewController {
     

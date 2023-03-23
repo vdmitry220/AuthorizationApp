@@ -60,7 +60,7 @@ extension ProfileViewController {
     }
 }
 
-// MARK: - Buttons
+// MARK: - CustomButtons
 
 extension ProfileViewController {
     
@@ -75,8 +75,8 @@ extension ProfileViewController {
     
     func setEditProfileButtonConstraints() {
         editProfileButton.translatesAutoresizingMaskIntoConstraints = false
-        editProfileButton.leadingAnchor.constraint(equalTo: infoUserStackView.leadingAnchor, constant: 1).isActive = true
-        editProfileButton.trailingAnchor.constraint(equalTo: infoUserStackView.trailingAnchor, constant: -1).isActive = true
+        editProfileButton.leadingAnchor.constraint(equalTo: infoUserStackView.leadingAnchor).isActive = true
+        editProfileButton.trailingAnchor.constraint(equalTo: infoUserStackView.trailingAnchor).isActive = true
     }
     
     func setContraintsBottons() {
@@ -85,8 +85,8 @@ extension ProfileViewController {
          self.logOutButton].forEach { button in
             button.translatesAutoresizingMaskIntoConstraints = false
             button.heightAnchor.constraint(equalToConstant: 35).isActive = true
-            button.leadingAnchor.constraint(equalTo: menuStackView.leadingAnchor, constant: 1).isActive = true
-            button.trailingAnchor.constraint(equalTo: menuStackView.trailingAnchor, constant: -1).isActive = true
+            button.leadingAnchor.constraint(equalTo: menuStackView.leadingAnchor).isActive = true
+            button.trailingAnchor.constraint(equalTo: menuStackView.trailingAnchor).isActive = true
         }
     }
     
@@ -95,7 +95,7 @@ extension ProfileViewController {
     }
 }
 
-// MARK: - StackView
+// MARK: - UIStackView
 
 extension ProfileViewController {
     func configureStackView() {
@@ -153,7 +153,7 @@ extension ProfileViewController {
     }
 }
 
-// MARK: - ImageView
+// MARK: - UIImageView
 
 extension ProfileViewController {
     

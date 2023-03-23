@@ -15,7 +15,6 @@ class ProfileViewModel {
             self.coordinator = coordinator
             self.userDataService = userDataService
             self.authorizationService = authorizationService
-            authorizationService.addUserState()
         }
 }
 

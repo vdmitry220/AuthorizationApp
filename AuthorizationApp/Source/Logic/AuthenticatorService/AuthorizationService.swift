@@ -4,10 +4,8 @@ import Firebase
 
 protocol AuthorizationService: AnyObject {
     var user: User? { get }
-    
     func createNewAccount(with credentials: Credentials, completion: @escaping (_ user: User?, _ error: String?) -> ())
     func signIn(with credentials: Credentials,  completion: @escaping (_ user: User?, _ error: String?) -> ())
-    func addUserState()
     func logOut()
 }
 
@@ -55,12 +53,6 @@ extension AuthorizationServiceImp: AuthorizationService {
             print("User logged out")
         } catch {
             print(error.localizedDescription)
-        }
-    }
-    
-    func addUserState() {
-        authorizer.addStateDidChangeListener { auth, user in
-            
         }
     }
 }

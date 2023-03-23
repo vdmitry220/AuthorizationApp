@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		3A10350C29B5F79A00248275 /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A10350B29B5F79A00248275 /* CustomButton.swift */; };
+		3A25C1E729CCDC490015FB4D /* background.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 3A25C1E629CCD7B00015FB4D /* background.mp4 */; };
 		3A610D93296892080002158C /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A610D92296892080002158C /* AppCoordinator.swift */; };
 		3A610D95296892480002158C /* FlowAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A610D94296892480002158C /* FlowAssembly.swift */; };
 		3A610D97296892560002158C /* ServiceAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A610D96296892560002158C /* ServiceAssembly.swift */; };
@@ -51,6 +52,7 @@
 		34C37A5B1E6B7C507B991B36 /* Pods_AuthorizationApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AuthorizationApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		38A29DDFEA6BA33CC421CAEF /* Pods-AuthorizationApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AuthorizationApp.release.xcconfig"; path = "Target Support Files/Pods-AuthorizationApp/Pods-AuthorizationApp.release.xcconfig"; sourceTree = "<group>"; };
 		3A10350B29B5F79A00248275 /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
+		3A25C1E629CCD7B00015FB4D /* background.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = background.mp4; sourceTree = "<group>"; };
 		3A610D92296892080002158C /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		3A610D94296892480002158C /* FlowAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlowAssembly.swift; sourceTree = "<group>"; };
 		3A610D96296892560002158C /* ServiceAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceAssembly.swift; sourceTree = "<group>"; };
@@ -110,6 +112,13 @@
 			path = Components;
 			sourceTree = "<group>";
 		};
+		3A25C1E329CCD6C60015FB4D /* Video */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Video;
+			sourceTree = "<group>";
+		};
 		3A610D89296888B90002158C /* AppDelegate */ = {
 			isa = PBXGroup;
 			children = (
@@ -152,6 +161,7 @@
 		3A610D8D296889620002158C /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				3A25C1E329CCD6C60015FB4D /* Video */,
 				3A610D8E296889820002158C /* Images */,
 				3A610D8F296889880002158C /* Plists */,
 			);
@@ -161,6 +171,7 @@
 		3A610D8E296889820002158C /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				3A25C1E629CCD7B00015FB4D /* background.mp4 */,
 				3AC1B8462922A8B50017B757 /* Assets.xcassets */,
 			);
 			path = Images;
@@ -416,6 +427,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3AC1B84A2922A8B50017B757 /* LaunchScreen.storyboard in Resources */,
+				3A25C1E729CCDC490015FB4D /* background.mp4 in Resources */,
 				3AC1B8472922A8B50017B757 /* Assets.xcassets in Resources */,
 				3AD370E129C22FD400707B82 /* GoogleService-Info.plist in Resources */,
 			);
@@ -658,8 +670,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = AuthorizationApp/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -673,6 +687,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = Dmitry.AuthorizationApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -685,8 +700,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = AuthorizationApp/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -700,6 +717,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = Dmitry.AuthorizationApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
