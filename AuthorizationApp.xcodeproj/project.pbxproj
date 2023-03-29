@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		3A10350C29B5F79A00248275 /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A10350B29B5F79A00248275 /* CustomButton.swift */; };
 		3A25C1E729CCDC490015FB4D /* background.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 3A25C1E629CCD7B00015FB4D /* background.mp4 */; };
+		3A30325E29D4887B00C493F3 /* BackgroundVideoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A30325D29D4887B00C493F3 /* BackgroundVideoView.swift */; };
+		3A30326029D48EE300C493F3 /* VideoPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A30325F29D48EE300C493F3 /* VideoPlayerView.swift */; };
+		3A30326629D4B9CA00C493F3 /* VideoType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A30326529D4B9CA00C493F3 /* VideoType.swift */; };
 		3A610D93296892080002158C /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A610D92296892080002158C /* AppCoordinator.swift */; };
 		3A610D95296892480002158C /* FlowAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A610D94296892480002158C /* FlowAssembly.swift */; };
 		3A610D97296892560002158C /* ServiceAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A610D96296892560002158C /* ServiceAssembly.swift */; };
@@ -53,6 +56,9 @@
 		38A29DDFEA6BA33CC421CAEF /* Pods-AuthorizationApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AuthorizationApp.release.xcconfig"; path = "Target Support Files/Pods-AuthorizationApp/Pods-AuthorizationApp.release.xcconfig"; sourceTree = "<group>"; };
 		3A10350B29B5F79A00248275 /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
 		3A25C1E629CCD7B00015FB4D /* background.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = background.mp4; sourceTree = "<group>"; };
+		3A30325D29D4887B00C493F3 /* BackgroundVideoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundVideoView.swift; sourceTree = "<group>"; };
+		3A30325F29D48EE300C493F3 /* VideoPlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPlayerView.swift; sourceTree = "<group>"; };
+		3A30326529D4B9CA00C493F3 /* VideoType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoType.swift; sourceTree = "<group>"; };
 		3A610D92296892080002158C /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		3A610D94296892480002158C /* FlowAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlowAssembly.swift; sourceTree = "<group>"; };
 		3A610D96296892560002158C /* ServiceAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceAssembly.swift; sourceTree = "<group>"; };
@@ -107,16 +113,36 @@
 		3A10350829B5E7AE00248275 /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				3A10350B29B5F79A00248275 /* CustomButton.swift */,
+				3A30326729D4BA0B00C493F3 /* Buttons */,
+				3A30326429D4B98000C493F3 /* VideoViews */,
 			);
 			path = Components;
 			sourceTree = "<group>";
 		};
-		3A25C1E329CCD6C60015FB4D /* Video */ = {
+		3A25C1E329CCD6C60015FB4D /* LocalVideos */ = {
 			isa = PBXGroup;
 			children = (
+				3A25C1E629CCD7B00015FB4D /* background.mp4 */,
 			);
-			path = Video;
+			path = LocalVideos;
+			sourceTree = "<group>";
+		};
+		3A30326429D4B98000C493F3 /* VideoViews */ = {
+			isa = PBXGroup;
+			children = (
+				3A30325F29D48EE300C493F3 /* VideoPlayerView.swift */,
+				3A30325D29D4887B00C493F3 /* BackgroundVideoView.swift */,
+				3A30326529D4B9CA00C493F3 /* VideoType.swift */,
+			);
+			path = VideoViews;
+			sourceTree = "<group>";
+		};
+		3A30326729D4BA0B00C493F3 /* Buttons */ = {
+			isa = PBXGroup;
+			children = (
+				3A10350B29B5F79A00248275 /* CustomButton.swift */,
+			);
+			path = Buttons;
 			sourceTree = "<group>";
 		};
 		3A610D89296888B90002158C /* AppDelegate */ = {
@@ -161,7 +187,7 @@
 		3A610D8D296889620002158C /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				3A25C1E329CCD6C60015FB4D /* Video */,
+				3A25C1E329CCD6C60015FB4D /* LocalVideos */,
 				3A610D8E296889820002158C /* Images */,
 				3A610D8F296889880002158C /* Plists */,
 			);
@@ -171,7 +197,6 @@
 		3A610D8E296889820002158C /* Images */ = {
 			isa = PBXGroup;
 			children = (
-				3A25C1E629CCD7B00015FB4D /* background.mp4 */,
 				3AC1B8462922A8B50017B757 /* Assets.xcassets */,
 			);
 			path = Images;
@@ -505,11 +530,14 @@
 				3AEFC6BC296F4ED40002A496 /* AuthCoordinator.swift in Sources */,
 				3AF8C17B297EAE9600E5CFB3 /* HomeAssembly.swift in Sources */,
 				3AC1B8422922A8B30017B757 /* AuthViewController.swift in Sources */,
+				3A30326629D4B9CA00C493F3 /* VideoType.swift in Sources */,
 				3AC4EEDA299BFD0100F81679 /* AuthState.swift in Sources */,
 				3A10350C29B5F79A00248275 /* CustomButton.swift in Sources */,
 				3A610D95296892480002158C /* FlowAssembly.swift in Sources */,
 				3AE667B329AE7D3200EDE6BF /* UserDataService.swift in Sources */,
+				3A30325E29D4887B00C493F3 /* BackgroundVideoView.swift in Sources */,
 				3AE667B629B0E2A300EDE6BF /* ProfileViewModel.swift in Sources */,
+				3A30326029D48EE300C493F3 /* VideoPlayerView.swift in Sources */,
 				3AE667BA29B0E2CF00EDE6BF /* ProfileAssembly.swift in Sources */,
 				3AC1B83E2922A8B30017B757 /* AppDelegate.swift in Sources */,
 				3AD332DA29AE2F1F0010483D /* SessionService.swift in Sources */,

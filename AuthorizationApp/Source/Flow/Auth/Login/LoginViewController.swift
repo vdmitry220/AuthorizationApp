@@ -7,6 +7,7 @@ class LoginViewController: UIViewController {
     private var usernameTextField = UITextField()
     private var loginErrorDescriptionLabel = UILabel()
     private var stackView = UIStackView()
+    private var backgroundVideoView = BackgroundVideoView(video: "background", type: .mp4)
 
     private var loginButton = CustomButton(
         title: "",
@@ -17,10 +18,19 @@ class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .darkGray
         setup()
         bindState()
         bindData()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        backgroundVideoView.play()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        backgroundVideoView.pause()
     }
     
     func inject(viewModel: AuthViewModel) {
@@ -33,10 +43,16 @@ class LoginViewController: UIViewController {
 extension LoginViewController {
     
     func setup() {
+        setupBackground()
         configureStackView()
         setupTextField()
         setDelegates()
         setupLabel()
+    }
+    
+    func setupBackground() {
+        self.view.addSubview(backgroundVideoView)
+        backgroundVideoView.frame = self.view.frame
     }
 }
 

@@ -4,7 +4,7 @@ import AVFoundation
 class AuthViewController: UIViewController {
     
     private var stackView = UIStackView()
-    private var player: AVPlayer?
+    private var backgroundVideoView = BackgroundVideoView(video: "background", type: .mp4)
     
     private var signUp = CustomButton(
         title: "Sign up with email",
@@ -21,7 +21,16 @@ class AuthViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
-        playBackgroundVideo()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        backgroundVideoView.play()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        backgroundVideoView.pause()
     }
     
     func inject(viewModel: AuthViewModel) {
@@ -34,27 +43,14 @@ class AuthViewController: UIViewController {
 extension AuthViewController {
     
     func setup() {
-        view.backgroundColor = .gray
+        setupBackground()
         setupSignUpBotton()
         configureStackView()
     }
     
-    func playBackgroundVideo() {
-        guard let path = Bundle.main.path(forResource: "background", ofType: ".mp4") else { return }
-        player = AVPlayer(url: URL(fileURLWithPath: path))
-        player?.actionAtItemEnd = AVPlayer.ActionAtItemEnd.none
-        let palyerLayer = AVPlayerLayer(player: player)
-        palyerLayer.frame = self.view.frame
-        palyerLayer.videoGravity = AVLayerVideoGravity.resizeAspectFill
-        self.view.layer.insertSublayer(palyerLayer, at: 0)
-        NotificationCenter.default.addObserver(self, selector: #selector(palayVideo), name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: player?.currentItem)
-        player?.seek(to: CMTime.zero)
-        player?.play()
-        self.player?.isMuted = true
-    }
-    
-    @objc func palayVideo() {
-        player?.seek(to: CMTime.zero)
+    func setupBackground() {
+        view.addSubview(backgroundVideoView)
+        backgroundVideoView.frame = self.view.frame
     }
 }
 
