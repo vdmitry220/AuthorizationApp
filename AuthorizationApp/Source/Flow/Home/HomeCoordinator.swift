@@ -1,6 +1,7 @@
 import Foundation
 import Swinject
 import SwinjectAutoregistration
+import AVKit
 
 class HomeCoordinator {
     
@@ -27,6 +28,12 @@ extension HomeCoordinator: Coordinator {
     }
     
     func navigate(_ route: Route) {
-        
+
     }
+}
+
+// MARK: - Navigation
+
+extension HomeCoordinator {
+
 }
