@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		3A10350C29B5F79A00248275 /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A10350B29B5F79A00248275 /* CustomButton.swift */; };
 		3A25C1E729CCDC490015FB4D /* background.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 3A25C1E629CCD7B00015FB4D /* background.mp4 */; };
+		3A28C33229F8345100595240 /* VideoApiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A28C33129F8345100595240 /* VideoApiService.swift */; };
 		3A30325E29D4887B00C493F3 /* BackgroundVideoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A30325D29D4887B00C493F3 /* BackgroundVideoView.swift */; };
 		3A30326029D48EE300C493F3 /* VideoPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A30325F29D48EE300C493F3 /* VideoPlayerView.swift */; };
 		3A30326629D4B9CA00C493F3 /* VideoType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A30326529D4B9CA00C493F3 /* VideoType.swift */; };
@@ -60,6 +61,7 @@
 		38A29DDFEA6BA33CC421CAEF /* Pods-AuthorizationApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AuthorizationApp.release.xcconfig"; path = "Target Support Files/Pods-AuthorizationApp/Pods-AuthorizationApp.release.xcconfig"; sourceTree = "<group>"; };
 		3A10350B29B5F79A00248275 /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
 		3A25C1E629CCD7B00015FB4D /* background.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = background.mp4; sourceTree = "<group>"; };
+		3A28C33129F8345100595240 /* VideoApiService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoApiService.swift; sourceTree = "<group>"; };
 		3A30325D29D4887B00C493F3 /* BackgroundVideoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundVideoView.swift; sourceTree = "<group>"; };
 		3A30325F29D48EE300C493F3 /* VideoPlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPlayerView.swift; sourceTree = "<group>"; };
 		3A30326529D4B9CA00C493F3 /* VideoType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoType.swift; sourceTree = "<group>"; };
@@ -133,6 +135,21 @@
 				3A25C1E629CCD7B00015FB4D /* background.mp4 */,
 			);
 			path = LocalVideos;
+			sourceTree = "<group>";
+		};
+		3A28C33329F8360D00595240 /* ApiClient */ = {
+			isa = PBXGroup;
+			children = (
+				3A28C33129F8345100595240 /* VideoApiService.swift */,
+			);
+			path = ApiClient;
+			sourceTree = "<group>";
+		};
+		3A2CB8FB2A49E9A500A6F537 /* CacheManager */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = CacheManager;
 			sourceTree = "<group>";
 		};
 		3A30326429D4B98000C493F3 /* VideoViews */ = {
@@ -269,6 +286,8 @@
 		3AB0D23629894F250073C5E8 /* Logic */ = {
 			isa = PBXGroup;
 			children = (
+				3A2CB8FB2A49E9A500A6F537 /* CacheManager */,
+				3A28C33329F8360D00595240 /* ApiClient */,
 				3AD370DF29C22F1700707B82 /* AuthenticatorService */,
 				3AD332D829AE2F060010483D /* SessionService */,
 				3AD74CA429ACB6A9003879AE /* UserDefaults */,
@@ -556,6 +575,7 @@
 				3A610D95296892480002158C /* FlowAssembly.swift in Sources */,
 				3AE667B329AE7D3200EDE6BF /* UserDataService.swift in Sources */,
 				3A30325E29D4887B00C493F3 /* BackgroundVideoView.swift in Sources */,
+				3A28C33229F8345100595240 /* VideoApiService.swift in Sources */,
 				3AE667B629B0E2A300EDE6BF /* ProfileViewModel.swift in Sources */,
 				3A30326029D48EE300C493F3 /* VideoPlayerView.swift in Sources */,
 				3AE667BA29B0E2CF00EDE6BF /* ProfileAssembly.swift in Sources */,

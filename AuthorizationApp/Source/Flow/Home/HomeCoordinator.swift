@@ -28,12 +28,27 @@ extension HomeCoordinator: Coordinator {
     }
     
     func navigate(_ route: Route) {
-
+        switch route {
+        case .fullScreen(let player):
+            showFullScreen(player)
+        default:
+            break
+        }
     }
 }
 
 // MARK: - Navigation
 
 extension HomeCoordinator {
-
+    
+    func showFullScreen(_ player: AVPlayer) {
+        player.pause()
+        let playerViewController = AVPlayerViewController()
+        playerViewController.player = player
+        navigationController.present(playerViewController, animated: true) {
+            DispatchQueue.main.async {
+                player.play()
+            }
+        }
+    }
 }

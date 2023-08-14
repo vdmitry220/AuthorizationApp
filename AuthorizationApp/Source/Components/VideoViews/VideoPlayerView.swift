@@ -8,7 +8,7 @@ class VideoPlayerView: UIView {
     }
     
     var playerLayer: AVPlayerLayer {
-        return layer as! AVPlayerLayer
+        layer as! AVPlayerLayer
     }
     
     var player: AVPlayer? {

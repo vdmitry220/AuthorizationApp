@@ -1,9 +1,11 @@
 import UIKit
+import AVKit
 
 class HomeViewController: UIViewController {
     
     private var viewModel: HomeViewModel!
     private var tableView = UITableView()
+    var playerControllerDidDismiss: (() -> ())?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -15,7 +17,8 @@ class HomeViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        update()
+        viewModel.updateData { self.update() }
+        self.playerControllerDidDismiss?()
     }
     
     func inject(viewModel: HomeViewModel) {
@@ -59,18 +62,20 @@ extension HomeViewController {
 extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+        return viewModel.videos.value.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: HomeTableViewCell.reuseIdentifier, for: indexPath) as! HomeTableViewCell
-
+        let model = viewModel.videos.value[indexPath.row]
+        cell.update(video: model)
+        cell.fullScreen { self.viewModel.playFullScreenVideo($0) }
+        playerControllerDidDismiss = cell.playerControllerWasDismissed
         return cell
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         let cellHeight: CGFloat = 250
-        
         return cellHeight
     }
 }

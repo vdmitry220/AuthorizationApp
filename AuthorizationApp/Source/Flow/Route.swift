@@ -6,5 +6,6 @@ enum Route {
     case signUp
     case signIn
     case home
+    case fullScreen(player: AVPlayer)
 }
 

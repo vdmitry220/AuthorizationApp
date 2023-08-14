@@ -1,8 +1,9 @@
 import UIKit
+import AVKit
 
 class HomeTableViewCell: UITableViewCell {
     
-    private var homeVideoView = HomeVideoView(url: URL(string: "https://firebasestorage.googleapis.com:443/v0/b/auth-91b43.appspot.com/o/videos%2Fcountries%2FUkraine.mp4?alt=media&token=1bd8fa7a-69b4-4619-b34d-cb2395874c16")!)
+    private var homeVideoView = HomeVideoView()
     private var titleLable = UILabel()
 
     override func awakeFromNib() {
@@ -13,6 +14,12 @@ class HomeTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
         setLabel()
         setVideoView()
+        homeVideoView.update()
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
     }
 }
 
@@ -31,10 +38,10 @@ extension HomeTableViewCell {
     
     func setVideoView() {
         contentView.addSubview(homeVideoView)
-        configHomeVideoViewContraints()
+        configHomeVideoViewConstraints()
     }
 
-    func configHomeVideoViewContraints() {
+    func configHomeVideoViewConstraints() {
         homeVideoView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             homeVideoView.topAnchor.constraint(equalTo: contentView.topAnchor),
@@ -42,6 +49,11 @@ extension HomeTableViewCell {
             homeVideoView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
             homeVideoView.bottomAnchor.constraint(equalTo: titleLable.topAnchor)
         ])
+    }
+    
+    func update(video: Video) {
+        homeVideoView.url = video.url
+        titleLable.text = video.title
     }
 }
 
@@ -51,17 +63,29 @@ extension HomeTableViewCell {
     
     func setLabel() {
         contentView.addSubview(titleLable)
-        titleLable.text = "Test"
-        configTitleLableConstraints()
+        configTitleLabelConstraints()
     }
 
-    func configTitleLableConstraints() {
+    func configTitleLabelConstraints() {
         titleLable.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             titleLable.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             titleLable.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             titleLable.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
         ])
+    }
+}
+
+// MARK: - VideoPlayer
+
+extension HomeTableViewCell {
+    
+    func fullScreen(_ completion: @escaping (AVPlayer) -> Void) {
+        homeVideoView.fullScreenCompletion = completion
+    }
+    
+    func playerControllerWasDismissed() {
+        homeVideoView.setupPlayerLayer()
     }
 }
 

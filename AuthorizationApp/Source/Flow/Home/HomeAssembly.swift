@@ -23,7 +23,8 @@ extension HomeAssembly: Assembly {
             
             return HomeViewModel(
                 coordinator: coordinator,
-                authorizationService: resolver~>
+                authorizationService: resolver~>,
+                videoApiService: resolver~>
             )
         }
     }

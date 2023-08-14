@@ -1,7 +1,7 @@
 import Foundation
 
 enum VideoState {
-    case playing
-    case paused
-    case reloading
+    case play
+    case pause
+    case reload
 }

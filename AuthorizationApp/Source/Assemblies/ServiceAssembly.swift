@@ -12,6 +12,7 @@ extension ServiceAssembly: Assembly {
         assemblyUserDataService(container: container)
         assemblySessionService(container: container)
         assembleAuthorizationService(container: container)
+        assembleVideoApiService(container: container)
     }
 }
 
@@ -33,6 +34,10 @@ private extension ServiceAssembly {
     
     func assembleAuthorizationService(container: Container) {
         container.autoregister(AuthorizationService.self, initializer: AuthorizationServiceImp.init).inObjectScope(.container)
+    }
+    
+    func assembleVideoApiService(container: Container) {
+        container.autoregister(VideoApiService.self, initializer: VideoApiServiceImp.init).inObjectScope(.container)
     }
 }
 

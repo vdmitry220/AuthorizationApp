@@ -15,8 +15,10 @@ class Observable<T> {
     }
 
     
-    func bind(listener: Listener?) {
+    func bind(_ listener: Listener?) {
         self.listener = listener
         listener?(value)
     }
 }
+
+

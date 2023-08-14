@@ -1,13 +1,13 @@
 import Foundation
 import Rswift
 import UIKit
-import AVKit
 import AVFoundation
+import AVKit
 
 class HomeVideoView: UIView {
     private var player = AVPlayer()
     private var videoPlayerView = VideoPlayerView()
-    private var isVideoPlaying = VideoState.paused
+    private var isVideoPlaying = VideoState.pause
     private var previewImageView = UIImageView()
     private var stackView = UIStackView()
     private var controlStackView = UIStackView()
@@ -15,16 +15,15 @@ class HomeVideoView: UIView {
     private var fullScreenButton = UIButton()
     private var videoControlSlider = UISlider()
     private var timeCodeLabel = UILabel()
-    private var notification = NotificationCenter.default
-    var url: URL
     
-    init(url: URL) {
-        self.url = url
-        
+    private var notification = NotificationCenter.default
+    var paybackObserver: Any?
+    var fullScreenCompletion: ((AVPlayer) -> Void)?
+    var url: URL?
+    
+    init() {
         super.init(frame: .zero)
         setup()
-        generate()
-        trackPlayerProgress()
     }
     
     required init?(coder: NSCoder) {
@@ -32,11 +31,12 @@ class HomeVideoView: UIView {
     }
     
     override func layoutSubviews() {
+        super.layoutSubviews()
         addSubview(videoPlayerView)
         videoPlayerView.frame = self.frame
+        videoPlayerView.playerLayer.videoGravity = .resizeAspect
         configStackViewContrainsts()
         configPlayPauseButtonConstraints()
-        configSliderConstraints()
         configControlStackViewConstraints()
     }
 }
@@ -52,6 +52,11 @@ extension HomeVideoView {
         setupSlider()
         setupLabel()
     }
+    
+    func update() {
+        setupVideoPlayer()
+        addVideoTimeObserver()
+    }
 }
 
 // MARK: - VideoPlayerView
@@ -59,100 +64,59 @@ extension HomeVideoView {
 extension HomeVideoView {
     
     private func setupVideoPlayer() {
-        guard let videoURL = URL(string: "https://firebasestorage.googleapis.com:443/v0/b/auth-91b43.appspot.com/o/videos%2Fcountries%2FUkraine.mp4?alt=media&token=1bd8fa7a-69b4-4619-b34d-cb2395874c16") else { return }
-        player = AVPlayer(url: videoURL)
+        if let url = url  {
+            let asset = AVAsset(url: url)
+            let item = AVPlayerItem(asset: asset)
+            player = AVPlayer(playerItem: item)
+            didFinishVideoObserver(palyerItem: item)
+        }
         player.actionAtItemEnd = AVPlayer.ActionAtItemEnd.none
         player.isMuted = true
         videoPlayerView.player = player
-        addObserver()
     }
     
     func play() {
         player.play()
-        isVideoPlaying = .playing
+        isVideoPlaying = .play
     }
     
     func pause() {
         player.pause()
     }
     
-    func trackPlayerProgress() {
+    private func addVideoTimeObserver() {
         let inreval = CMTime(value: 1, timescale: 2)
-        player.addPeriodicTimeObserver(forInterval: inreval, queue: DispatchQueue.main, using: { progresTime in
+        player.addPeriodicTimeObserver(forInterval: inreval, queue: DispatchQueue.main, using: { [weak self] progresTime in
             let seconds = CMTimeGetSeconds(progresTime)
             let secondsString = String(format: "%02d", Int(seconds) % 60)
             let minutesString = String(format: "%02d", Int(seconds / 60))
             
-            self.timeCodeLabel.text = "\(minutesString):\(secondsString)"
+            self?.timeCodeLabel.text = "\(minutesString):\(secondsString)"
             
-            if let duration = self.player.currentItem?.duration {
+            if let duration = self?.player.currentItem?.duration {
                 let durationSeconds = CMTimeGetSeconds(duration)
-                self.videoControlSlider.value = Float(seconds / durationSeconds)
+                self?.videoControlSlider.value = Float(seconds / durationSeconds)
             }
         })
     }
     
-    func addObserver() {
-        notification.addObserver(self, selector: #selector(videoDidEnded), name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: player.currentItem)
-    }
-}
-
-// MARK: - Objc
-
-private extension HomeVideoView {
-    
-    @objc func videoDidEnded() {
-        pause()
-        isVideoPlaying = .reloading
-        playPauseButton.setImage(R.image.reload(), for: .normal)
-    }
-    
-    @objc func playVideo() {
-        switch isVideoPlaying {
-        case .paused:
-            playPauseButton.setImage(R.image.pause(), for: .normal)
-            play()
-            isVideoPlaying = .playing
-        case .playing:
-            playPauseButton.setImage(R.image.play(), for: .normal)
-            pause()
-            isVideoPlaying = .paused
-        case .reloading:
-            player.seek(to: .zero)
-            play()
-            isVideoPlaying = .playing
-            playPauseButton.setImage(R.image.pause(), for: .normal)
+    func didFinishVideoObserver(palyerItem: AVPlayerItem) {
+        paybackObserver = notification.addObserver(
+            forName: .AVPlayerItemDidPlayToEndTime,
+            object: palyerItem,
+            queue: .main)
+        { [weak self] _ in
+            self?.pause()
+            self?.isVideoPlaying = .reload
+            self?.playPauseButton.setImage(R.image.reload(), for: .normal)
         }
     }
     
-    @objc func handelSliderChange() {
-        if let duration = player.currentItem?.duration {
-            let totalSeconds = CMTimeGetSeconds(duration)
-            let value = Float64(videoControlSlider.value) * totalSeconds
-            let seekTime = CMTime(value: Int64(value), timescale: 1)
-            player.seek(to: seekTime)
-        }
-    }
-}
-
-// MARK: - PreviewImage
-
-private extension HomeVideoView {
-    
-    func generate() {
-        let asset = AVAsset(url: url)
-        let imageGenerator = AVAssetImageGenerator(asset: asset)
-        imageGenerator.appliesPreferredTrackTransform = true
-        let timestamp = CMTime(seconds: 10, preferredTimescale: 60)
-        
-        if let imageRef = try? imageGenerator.copyCGImage(at: timestamp, actualTime: nil) {
-            let image = UIImage(cgImage: imageRef)
-            self.previewImageView = UIImageView(image: image)
-        }
-    }
-    
-    func openFullScreenVideo(controller: AVPlayerViewController) {
-        controller.player = player
+    func setupPlayerLayer() {
+        videoPlayerView.player = player
+        videoPlayerView.playerLayer.frame = self.bounds
+        videoPlayerView.playerLayer.videoGravity = .resizeAspect
+        videoPlayerView.playerLayer.contentsGravity = .resizeAspect
     }
 }
 
@@ -199,7 +163,15 @@ extension HomeVideoView {
     func setupButtons() {
         playPauseButton.setImage(R.image.play(), for: .normal)
         fullScreenButton.setImage(R.image.fullScreen(), for: .normal)
-        playPauseButton.addTarget(self, action: #selector(playVideo), for: .touchUpInside)
+        playPauseButton.addTarget(
+            self,
+            action: #selector(playVideo),
+            for: .touchUpInside)
+        
+        fullScreenButton.addTarget(
+            self,
+            action: #selector(fullScreenButtonPressed),
+            for: .touchUpInside)
     }
     
     func configPlayPauseButtonConstraints() {
@@ -221,14 +193,10 @@ extension HomeVideoView {
         videoControlSlider.thumbTintColor = .red
         videoControlSlider.minimumTrackTintColor = .red
         videoControlSlider.maximumTrackTintColor = .darkGray
-        videoControlSlider.addTarget(self, action: #selector(handelSliderChange), for: .valueChanged)
-    }
-    
-    func configSliderConstraints() {
-        videoControlSlider.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            
-        ])
+        videoControlSlider.addTarget(
+            self,
+            action: #selector(handelSliderChange),
+            for: .valueChanged)
     }
 }
 
@@ -239,3 +207,48 @@ extension HomeVideoView {
         timeCodeLabel.textColor = .white
     }
 }
+
+// MARK: - Objc
+
+private extension HomeVideoView {
+    
+    @objc func playVideo() {
+        switch isVideoPlaying {
+        case .pause:
+            playPauseButton.setImage(R.image.pause(), for: .normal)
+            play()
+            isVideoPlaying = .play
+        case .play:
+            playPauseButton.setImage(R.image.play(), for: .normal)
+            pause()
+            isVideoPlaying = .pause
+        case .reload:
+            player.seek(to: .zero)
+            play()
+            isVideoPlaying = .play
+            playPauseButton.setImage(R.image.pause(), for: .normal)
+        }
+    }
+    
+    @objc func handelSliderChange() {
+        if let duration = player.currentItem?.duration {
+            let totalSeconds = CMTimeGetSeconds(duration)
+            let value = Float64(videoControlSlider.value) * totalSeconds
+            let seekTime = CMTime(value: Int64(value), timescale: 1)
+            player.seek(to: seekTime)
+        }
+    }
+    
+    @objc func fullScreenButtonPressed() {
+        NotificationCenter.default.addObserver(self, selector: #selector(avPlayerDidDismiss), name: Notification.Name("avPlayerDidDismiss"), object: nil)
+        fullScreenCompletion?(player)
+    }
+    
+    @objc func avPlayerDidDismiss(_ notification: Notification) {
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.5) {[weak self] in
+            self?.playVideo()
+            NotificationCenter.default.removeObserver(self as Any, name: Notification.Name("avPlayerDidDismiss"), object: nil)
+        }
+    }
+}
+

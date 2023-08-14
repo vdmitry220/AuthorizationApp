@@ -226,7 +226,7 @@ extension LoginViewController {
     }
     
     func bindState() {
-        viewModel.authState.bind(listener: { state in
+        viewModel.authState.bind { state in
             DispatchQueue.main.async {
                 if state == .signIn {
                     self.navigationItem.title = "Sign in"
@@ -237,11 +237,11 @@ extension LoginViewController {
                     self.setupButton("Create a new account")
                 }
             }
-        })
+        }
     }
     
     func login() {
-        viewModel.authState.bind(listener: { state in
+        viewModel.authState.bind { state in
             DispatchQueue.main.async {
                 if state == .signUp {
                     self.viewModel.createUser()
@@ -249,7 +249,7 @@ extension LoginViewController {
                     self.viewModel.signIn()
                 }
             }
-        })
+        }
     }
 }
 
